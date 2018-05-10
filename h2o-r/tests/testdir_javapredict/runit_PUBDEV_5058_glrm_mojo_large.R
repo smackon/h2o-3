@@ -44,4 +44,4 @@ setParmsData <- function(numTest=1000) {
   return(list("params" = params, "tDataset" = test_frame))
 }
 
-doTest("Binomial GLM mojo test", test.ordinalGlrm.mojo)
+doTest("GLRM mojo test", test.ordinalGlrm.mojo)
