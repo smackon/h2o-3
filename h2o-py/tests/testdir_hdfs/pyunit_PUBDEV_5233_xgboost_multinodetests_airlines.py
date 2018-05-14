@@ -31,9 +31,10 @@ def hdfs_xgboost_airlines():
         myX.remove("IsDepDelayed")
         y = "IsDepDelayed"
 
+        h2oParams = {"ntrees":100, "max_depth":10, "seed":987654321, "learn_rate":0.7, "col_sample_rate_per_tree" : 0.9,
+                 "min_rows" : 5, "score_tree_interval": 100, 'booster':'gbtree', 'seed':12345}
         # parameters used to train XGBoost, should be the same as in native and H2O
-        h2o_model = H2OXGBoostEstimator(training_frame=airlines_h2o, learn_rate = 0.7,
-                                    booster='gbtree', seed=1, ntrees=2)
+        h2o_model = H2OXGBoostEstimator(**h2oParams)
         h2o_model.train(x=myX, y=y, training_frame=airlines_h2o)
 
         # get scoring time

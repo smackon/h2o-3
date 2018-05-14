@@ -36,11 +36,6 @@ def higgs_compare_test():
     h2oPredictTime = time.time()-time1
 
     # build native XGBoost model
-    nativeParam = {'eta': h2oParams["learn_rate"], 'objective': 'multi:softprob', 'booster': 'gbtree',
-                   'max_depth': h2oParams["max_depth"], 'seed': h2oParams["seed"],
-                   "colsample_bytree":h2oParams["col_sample_rate_per_tree"], "min_child_weight":h2oParams["min_rows"]}
-
-
     nativeTrain = genDMatrix(higgs_h2o_train, myX, y)
     nativeTest = genDMatrix(higgs_h2o_test, myX, y)
     time1 = time.time()
