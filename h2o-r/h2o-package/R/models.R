@@ -1037,17 +1037,20 @@ h2o.giniCoef <- function(object, train=FALSE, valid=FALSE, xval=FALSE) {
 #' @param object an \linkS4class{H2OModel} object.
 #' @export
 h2o.coef <- function(object) {
-  if (is(object, "H2OModel")) {
-    if (is.null(object@model$coefficients_table)) stop("Can only extract coefficeints from GLMs")
-    if (object@allparameters$family != "multinomial" && object@allparameters$family != "ordinal") {
-      coefs <- object@model$coefficients_table$coefficients
-      names(coefs) <- object@model$coefficients_table$names
+  if (is(object, "H2OModel") && object@algorithm == "glm") {
+    if (object@allparameters$family %in% c("multinomial", "ordinal")) {
+      object@model$coefficients_table
     } else {
-      coefs <- object@model$coefficients_table
+      structure(object@model$coefficients_table$coefficients,
+                names = object@model$coefficients_table$names)
     }
-    return(coefs)
+  } else if (is(object, "H2OCoxPHModel")) {
+      structure(object@model$coefficients_table$coefficients,
+                names = object@model$coefficients_table$names)
+  } else if (is(object, "H2OCoxPHModelSummary")) {
+    object@summary$coefficients
   } else {
-    stop("Can only extract coefficients from GLMs")
+    stop("Can only extract coefficients from GLMs and CoxPH models")
   }  
 }
 
