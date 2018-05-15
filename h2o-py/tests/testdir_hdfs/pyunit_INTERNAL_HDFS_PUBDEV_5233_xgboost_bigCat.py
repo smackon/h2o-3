@@ -61,7 +61,7 @@ def bigCat_test_hdfs():
 def summarizeResult(h2oPredict, nativePred, h2oTrainTime, h2oPredictTime, nativeTrainTime, nativeScoreTime,
                     nativeLabels):
     # Result comparison in terms of time
-    print("H2OXGBoost train time is {0}s.  Native XGBoost train time is {1}s\n.  H2OGBoost scoring time is {2}s."
+    print("H2OXGBoost train time is {0}ms.  Native XGBoost train time is {1}s\n.  H2OGBoost scoring time is {2}s."
           "  Native XGBoost scoring time is {3}s.".format(h2oTrainTime, nativeTrainTime, h2oPredictTime,
                                                           nativeScoreTime))
     # Result comparison in terms of accuracy right now, that is the only thing available
