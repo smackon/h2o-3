@@ -12,6 +12,7 @@ if ("data.table" %in% rownames(installed.packages()))
 # as.h2o using randomly generated sparse matrices.
 
 check.as.h2o <- function() {
+  browser()
 # work with randomly generated matrices and check frames generated with new and original as.h2o agree.
   if (("slam" %in% rownames(installed.packages()))&&("data.table" %in% rownames(installed.packages()))) {
 
